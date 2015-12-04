@@ -6,23 +6,11 @@
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 12:44:26 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/04 14:26:17 by jbelless         ###   ########.fr       */
+/*   Updated: 2015/12/04 17:49:45 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static void	ft_initbuffer(char *ptb, int buff_size)
-{
-	int i;
-
-	i = 0;
-	while (i < buff_size)
-	{
-		ptb[i] = 0;
-		i++;
-	}
-}
 
 static int	ft_cop(char *str1, char **line, char *str2)
 {
@@ -34,11 +22,13 @@ static int	ft_cop(char *str1, char **line, char *str2)
 
 int			get_next_line(const int fd, char **line)
 {
-	char		buff[BUFF_SIZE + 1];
+	char		*buff;
 	int			tete;
 	static char	*rest;
 
-	ft_initbuffer(buff, BUFF_SIZE + 1);
+	buff = ft_strnew(BUFF_SIZE + 1);
+	if (fd < 0 || line == NULL)
+		return (-1);
 	*line = ft_strnew(1);
 	if (rest == NULL)
 		rest = ft_strnew(BUFF_SIZE);
@@ -47,11 +37,12 @@ int			get_next_line(const int fd, char **line)
 	*line = ft_strjoin(*line, rest);
 	while ((tete = read(fd, buff, BUFF_SIZE)) && tete != -1)
 	{
-		buff[BUFF_SIZE] = 0;
+		buff[tete] = 0;
 		if (ft_strchr(buff, '\n') != NULL)
 			return (ft_cop(buff, line, rest));
 		else
 			*line = ft_strjoin(*line, buff);
 	}
+	free(buff);
 	return (tete);
 }
