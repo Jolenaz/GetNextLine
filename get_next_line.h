@@ -19,4 +19,11 @@
 
 int	get_next_line(const int fd, char **line);
 
+typedef struct 		s_doc
+{
+	int		filed;
+	char 		*rest;
+	struct s_doc	*next;
+} 			t_doc;
+
 #endif
