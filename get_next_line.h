@@ -6,7 +6,7 @@
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/04 17:28:13 by jbelless         ###   ########.fr       */
+/*   Updated: 2015/12/08 12:14:27 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 # include "libft.h"
 # include <sys/types.h>
 # include <sys/uio.h>
-# define BUFF_SIZE 9999
+# define BUFF_SIZE 2
 
-int	get_next_line(const int fd, char **line);
+int					get_next_line(const int fd, char **line);
 
-typedef struct 		s_doc
+typedef struct		s_doc
 {
-	int		filed;
-	char 		*rest;
+	int				filed;
+	char			*rest;
 	struct s_doc	*next;
-} 			t_doc;
+}					t_doc;
 
 #endif
