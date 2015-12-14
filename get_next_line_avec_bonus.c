@@ -6,12 +6,11 @@
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 12:44:26 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/14 10:28:40 by jbelless         ###   ########.fr       */
+/*   Updated: 2015/12/14 09:41:41 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static int	ft_cop(char **str1, char **line, char **str2)
 {
@@ -31,6 +30,7 @@ int			read_get_next_line(const int fd, char **line, char **rest)
 	int			tete;
 
 	buff = ft_strnew(BUFF_SIZE + 1);
+	*line = ft_strnew(1);
 	if (*rest == NULL)
 		*rest = ft_strnew(BUFF_SIZE);
 	if (ft_strchr(*rest, '\n') != NULL)
@@ -55,22 +55,21 @@ int get_next_line(const int fd, char **line)
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	*line = ft_strnew(1);
 	tmp = &doc;
-	if (tmp->filed == 0)
+	if (tmp->rest == NULL)
 	{
 		doc.filed = fd;
 		doc.next = NULL;
-		return (read_get_next_line(fd, line, &(doc.rest)));
+		return (read_get_next_line(fd, line, &tmp->rest));
 	}
-	while (tmp->filed != fd && tmp->next != NULL)
-		tmp = tmp->next;
-	if (tmp->filed != fd)
+	while (tmp->filed != fd)
 	{
-		tmp->next = (t_doc*)malloc(sizeof(t_doc));
-		tmp->next->filed = fd;
-		tmp->next->next = NULL;
-		return (read_get_next_line(fd, line, &tmp->next->rest));
+		if (tmp->next == NULL)
+			break ;
+		tmp = tmp->next;
 	}
+	tmp->next = (t_doc*)malloc(sizeof(t_doc));
+	tmp->next->filed = fd;
+	tmp->next->next = NULL;
 	return (read_get_next_line(fd, line, &tmp->rest));
 }
