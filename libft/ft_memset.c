@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/25 09:39:22 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/25 16:10:16 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
+	char			let;
+	size_t			i;
+	char			*str;
 
-#endif
+	let = (unsigned char)c;
+	str = (char*)b;
+	i = 0;
+	while (i < len)
+	{
+		str[i] = let;
+		i++;
+	}
+	return (str);
+}

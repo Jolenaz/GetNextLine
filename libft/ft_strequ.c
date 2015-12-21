@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/27 17:42:38 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/30 15:23:52 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+int	ft_strequ(const char *s1, const char *s2)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
-
-#endif
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	if (ft_strcmp(s1, s2) == 0)
+		return (1);
+	return (0);
+}

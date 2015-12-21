@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/25 14:39:48 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/25 14:46:47 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+void	ft_putendl(char const *s)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
+	int i;
 
-#endif
+	i = 0;
+	while (s[i] != 0)
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
+	ft_putchar('\n');
+}

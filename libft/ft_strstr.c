@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/26 16:01:07 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/27 13:11:21 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
+	char	*c1;
+	size_t	i;
 
-#endif
+	c1 = (char*)s1;
+	i = 0;
+	if (*c1 == 0 && *s2)
+		return (NULL);
+	if (*s2 == 0)
+		return (c1);
+	if (*c1 != *s2)
+		return (ft_strstr(c1 + 1, s2));
+	else
+	{
+		while (c1[i] == s2[i] && c1[i] && s2[i])
+			i++;
+		if (i == ft_strlen(s2))
+			return (c1);
+		else if (c1[i])
+			return (ft_strstr(c1 + 1, s2));
+	}
+	return (NULL);
+}

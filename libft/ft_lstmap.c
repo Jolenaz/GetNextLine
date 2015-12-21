@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/30 11:41:47 by jbelless          #+#    #+#             */
+/*   Updated: 2015/12/03 11:30:08 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *))
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
+	t_list	*res;
 
-#endif
+	res = NULL;
+	if (lst == NULL || f == NULL)
+		return (NULL);
+	res = ft_lstnew(f(lst)->content, f(lst)->content_size);
+	if (!res)
+		return (NULL);
+	if (lst->next == NULL)
+		res->next = NULL;
+	else
+		res->next = ft_lstmap(lst->next, f);
+	return (res);
+}

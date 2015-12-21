@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/24 10:45:34 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/30 09:22:22 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+void	ft_putnbr(int nbr)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
-
-#endif
+	if (nbr == 2147483647)
+	{
+		ft_putstr("2147483647");
+		return ;
+	}
+	if (nbr == -2147483648)
+	{
+		ft_putstr("-2147483648");
+		return ;
+	}
+	if (nbr < 0)
+	{
+		ft_putchar('-');
+		nbr = -nbr;
+	}
+	if (nbr >= 10)
+		ft_putnbr(nbr / 10);
+	ft_putchar(nbr % 10 + 48);
+}

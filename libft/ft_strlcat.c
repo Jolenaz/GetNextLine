@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/26 13:28:57 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/26 15:24:25 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
+	size_t	i;
+	size_t	j;
 
-#endif
+	i = ft_strlen(dst);
+	j = ft_strlen(src);
+	if (size <= i)
+		return (j + size);
+	if (size == i + 1)
+		return (j + i);
+	if (size > i + 1 && size <= i + j + 1)
+		ft_strncat(dst, src, size - i - 1);
+	if (size > i + j + 1)
+		ft_strcat(dst, src);
+	return (i + j);
+}

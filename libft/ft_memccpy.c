@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:59:48 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:53 by jbelless         ###   ########.fr       */
+/*   Created: 2015/11/25 10:44:42 by jbelless          #+#    #+#             */
+/*   Updated: 2015/11/27 11:54:11 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# include <sys/types.h>
-# include <sys/uio.h>
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-
-typedef struct		s_doc
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	int				filed;
-	char			*rest;
-	struct s_doc	*next;
-}					t_doc;
+	char			*dst_tmp;
+	char			*src_tmp;
+	char			let;
+	size_t			i;
 
-#endif
+	i = 0;
+	src_tmp = (char*)src;
+	dst_tmp = (char*)dst;
+	let = (char)c;
+	while (i < n && src_tmp[i] != let)
+	{
+		dst_tmp[i] = src_tmp[i];
+		i++;
+	}
+	if (i == n)
+		return (NULL);
+	else
+		return (dst + i + 1);
+}
