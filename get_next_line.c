@@ -6,7 +6,7 @@
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 12:44:26 by jbelless          #+#    #+#             */
-/*   Updated: 2015/12/21 11:15:55 by jbelless         ###   ########.fr       */
+/*   Updated: 2015/12/23 16:17:04 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int	ft_cop(char **str1, char **line, char **str2)
 		return (-1);
 	ft_strdel(line);
 	*line = *vid;
-	free(*str2);
+	if (str2 != str1)
+		free(*str2);
 	if ((*str2 = ft_strdup(ft_strchr(*str1, '\0') + 1)) == NULL)
 		return (-1);
 	return (1);
