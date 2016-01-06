@@ -6,7 +6,7 @@
 /*   By: jbelless <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 12:44:26 by jbelless          #+#    #+#             */
-/*   Updated: 2016/01/04 16:28:07 by jbelless         ###   ########.fr       */
+/*   Updated: 2016/01/06 11:17:34 by jbelless         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ static int	read_get_next_line(const int fd, char **line, char **rest)
 		*rest = ft_strnew(BUFF_SIZE);
 	else if (ft_strchr(*rest, '\n') != NULL)
 		return (ft_cop(rest, line, rest));
-	else
-		*line = ft_strjoin(*line, *rest);
+	else if ((*line = ft_strjoin(*line, *rest)) == NULL)
+		return (-1);
 	if (norme(fd, line, rest, &tete) == 1)
 		return (1);
-	if (tete == 0 && *rest[0])
+	else if (*rest[0] || *line[0])
 	{
 		free(*rest);
 		return (1);
